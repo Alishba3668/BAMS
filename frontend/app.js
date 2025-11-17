@@ -1,4 +1,4 @@
-const API = "https://bams-8q7j.onrender.com";
+const API = "http://localhost:5000/api";
 
 async function apiGet(url) {
   return fetch(API + url).then(res => res.json());
