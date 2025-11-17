@@ -1,0 +1,91 @@
+{
+  "dept_1763330305263": {
+    "blockchain": {
+      "name": "chain",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763330305263,
+          "data": {
+            "type": "GENESIS",
+            "message": "SE genesis block"
+          },
+          "prev_hash": "0",
+          "nonce": 74259,
+          "hash": "0000eb1b4bfb9a0b68e6907f0884d2f8a09e807e1584eb9c25e1c2afa9e8e52a"
+        },
+        {
+          "index": 1,
+          "timestamp": 1763336997912,
+          "data": {
+            "type": "UPDATE_DEPT",
+            "timestamp": 1763336997912
+          },
+          "previousHash": "0000eb1b4bfb9a0b68e6907f0884d2f8a09e807e1584eb9c25e1c2afa9e8e52a",
+          "hash": "002a3763485ee67bc2bc7cfb78d4154a98ae8619eaf7d116d4f03e9f1035fc97",
+          "nonce": 315
+        },
+        {
+          "index": 2,
+          "timestamp": 1763337006922,
+          "data": {
+            "type": "UPDATE_DEPT",
+            "timestamp": 1763337006922
+          },
+          "previousHash": "002a3763485ee67bc2bc7cfb78d4154a98ae8619eaf7d116d4f03e9f1035fc97",
+          "hash": "00dfa5c8d86a31b66b77e3680096a321303dbf136ad8f7a3103022b83cba8b9d",
+          "nonce": 348
+        },
+        {
+          "index": 3,
+          "timestamp": 1763345121934,
+          "data": {
+            "type": "DELETE_DEPT",
+            "status": "deleted",
+            "timestamp": 1763345121934
+          },
+          "previousHash": "00dfa5c8d86a31b66b77e3680096a321303dbf136ad8f7a3103022b83cba8b9d",
+          "hash": "00f4c8d814c6620ffd291b6a678b1210d8ddbded95f1b16f2835cba681e3d625",
+          "nonce": 118
+        }
+      ],
+      "difficulty": 2
+    }
+  },
+  "dept_1763331880736": {
+    "name": "CS",
+    "blockchain": {
+      "name": "CS",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763331880736,
+          "data": {
+            "type": "GENESIS",
+            "message": "CS genesis block"
+          },
+          "prev_hash": "0",
+          "nonce": 13418,
+          "hash": "0000f98c83ed83d832b6300d1e943ae8dc7469fa176c298ddbade6bd6e52746f"
+        }
+      ]
+    }
+  },
+  "dept_1763344200560": {
+    "name": "SE",
+    "blockchain": {
+      "name": "SE",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763344200560,
+          "data": "GENESIS BLOCK",
+          "previousHash": "0",
+          "hash": "689f6707f30a1889bc622ce1e49c4a42c859167e43a9b055daadc65e03404e83",
+          "nonce": 0
+        }
+      ],
+      "difficulty": 2
+    }
+  }
+}

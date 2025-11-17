@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blockchain Explorer</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../app.js"></script>
+
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: "Segoe UI", Arial;
+    }
+
+    .navbar {
+      background: #1e88e5;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-buttons {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .nav-buttons button {
+      margin: 5px;
+      padding: 10px 18px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav-buttons button:hover {
+      background: #0d47a1;
+    }
+
+    .container {
+      width: 90%;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .sectionTitle {
+      margin-top: 30px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #1e88e5;
+      color: #1e88e5;
+      font-weight: bold;
+    }
+
+    /* LIST VIEW */
+    #listView p {
+      background: #e3f2fd;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table th {
+      background: #1e88e5;
+      color: white;
+      padding: 10px;
+    }
+    table td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      background: #f8f9ff;
+    }
+
+    /* DIAGRAM */
+    .block {
+      border: 2px solid #1e88e5;
+      padding: 15px;
+      margin: 10px;
+      background: #e3f2fd;
+      border-radius: 8px;
+      display: inline-block;
+      min-width: 140px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .arrow {
+      font-size: 28px;
+      color: #1e88e5;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .btn-primary {
+      background: #1e88e5;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #0d47a1;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Blockchain Attendance System</div>
+
+<div class="nav-buttons">
+  <a href="home.html"><button>Home</button></a>
+  <a href="departments.html"><button>Departments</button></a>
+  <a href="classes.html"><button>Classes</button></a>
+  <a href="students.html"><button>Students</button></a>
+  <a href="attendance.html"><button>Attendance</button></a>
+  <a href="search.html"><button>Search</button></a>
+  <a href="explorer.html"><button>Explorer</button></a>
+  <a href="validate.html"><button>Validation</button></a>
+  
+</div>
+
+<div class="container">
+  <h2>Blockchain Explorer</h2>
+
+  <div>
+    <button class="btn-primary" onclick="loadDepts()">Departments</button>
+    <button class="btn-primary" onclick="loadClasses()">Classes</button>
+    <button class="btn-primary" onclick="loadStudents()">Students</button>
+  </div>
+
+  <h2 class="sectionTitle" id="title"></h2>
+
+  <div id="listView"></div>
+  <div id="tableView"></div>
+  <div id="diagramView"></div>
+</div>
+
+<script>
+
+/* ------------------ Load Explorer Data ------------------ */
+
+async function loadDepts() {
+  const data = await apiGet("/explorer/departments");
+  renderExplorer("Departments", data);
+}
+
+async function loadClasses() {
+  const data = await apiGet("/explorer/classes");
+  renderExplorer("Classes", data);
+}
+
+async function loadStudents() {
+  const data = await apiGet("/explorer/students");
+  renderExplorer("Students", data);
+}
+
+function renderExplorer(title, data) {
+  document.getElementById("title").innerText = title;
+  document.getElementById("listView").innerHTML = "";
+  document.getElementById("tableView").innerHTML = "";
+  document.getElementById("diagramView").innerHTML = "";
+
+  let listHTML = "<h3 class='sectionTitle'>List View</h3>";
+
+  for (const id in data) {
+    listHTML += `
+      <p><b>${id}</b> — ${data[id].name}
+        <button class="btn-primary" onclick="viewChain('${title}','${id}')">View Chain</button>
+      </p>
+    `;
+  }
+
+  document.getElementById("listView").innerHTML = listHTML;
+}
+
+/* ------------------ View Chain ------------------ */
+
+async function viewChain(type, id) {
+  const chain = await apiGet(`/explorer/chain/${type}/${id}`);
+  renderTable(chain);
+  renderDiagram(chain);
+}
+
+/* ------------------ Table ------------------ */
+
+function renderTable(chain) {
+  let html = `
+    <h3 class='sectionTitle'>Table View</h3>
+    <table>
+      <tr>
+        <th>Index</th>
+        <th>Timestamp</th>
+        <th>Data</th>
+        <th>Hash</th>
+        <th>Prev Hash</th>
+      </tr>
+  `;
+
+  chain.forEach(b => {
+    html += `
+      <tr>
+        <td>${b.index}</td>
+        <td>${new Date(b.timestamp).toLocaleString()}</td>
+        <td>${JSON.stringify(b.data)}</td>
+        <td>${b.hash.substring(0, 15)}...</td>
+        <td>${b.previousHash.substring(0, 15)}...</td>
+      </tr>
+    `;
+  });
+
+  html += "</table>";
+  document.getElementById("tableView").innerHTML = html;
+}
+
+/* ------------------ Diagram ------------------ */
+
+function renderDiagram(chain) {
+  let html = "<h3 class='sectionTitle'>Chain Diagram</h3>";
+
+  chain.forEach((b, i) => {
+    html += `
+      <div class="block">
+        <b>Block ${b.index}</b><br>
+        ${b.hash.substring(0, 12)}...
+      </div>
+      ${i < chain.length - 1 ? "<span class='arrow'>➡</span>" : ""}
+    `;
+  });
+
+  document.getElementById("diagramView").innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>

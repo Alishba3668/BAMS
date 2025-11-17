@@ -1,0 +1,364 @@
+{
+  "class_1763331243601": {
+    "name": "BSE-7B",
+    "parentDept": "dept_1763330305263",
+    "blockchain": {
+      "name": "BSE-7A",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763331243602,
+          "data": {
+            "type": "GENESIS",
+            "message": "BSE-7B genesis block"
+          },
+          "prev_hash": "0000eb1b4bfb9a0b68e6907f0884d2f8a09e807e1584eb9c25e1c2afa9e8e52a",
+          "nonce": 51572,
+          "hash": "0000ee88f2e1d5735284dd16b21305678e02fe0754a0a6269706b2f0b65de678"
+        },
+        {
+          "index": 1,
+          "timestamp": 1763336028457,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7A",
+            "timestamp": 1763336028457
+          },
+          "previousHash": "0000ee88f2e1d5735284dd16b21305678e02fe0754a0a6269706b2f0b65de678",
+          "hash": "00aff524615f4f3bc4528786e5b0cfcab41940a02d3f0268e3ec8dda1762a616",
+          "nonce": 219
+        },
+        {
+          "index": 2,
+          "timestamp": 1763336556233,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7A",
+            "timestamp": 1763336556233
+          },
+          "previousHash": "00aff524615f4f3bc4528786e5b0cfcab41940a02d3f0268e3ec8dda1762a616",
+          "hash": "001753643507960c3b2d02199961867326d451a8a35fcb4ea566d65d4c496089",
+          "nonce": 44
+        },
+        {
+          "index": 3,
+          "timestamp": 1763336563626,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7B",
+            "timestamp": 1763336563626
+          },
+          "previousHash": "001753643507960c3b2d02199961867326d451a8a35fcb4ea566d65d4c496089",
+          "hash": "005ce46d1db57636799e5e9d733f8db04cb01bbaba875b6beb0c27460bbcd974",
+          "nonce": 83
+        },
+        {
+          "index": 4,
+          "timestamp": 1763338342531,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7A",
+            "timestamp": 1763338342531
+          },
+          "previousHash": "005ce46d1db57636799e5e9d733f8db04cb01bbaba875b6beb0c27460bbcd974",
+          "hash": "00d45327848bfe5a68891a5947e8cfb6547e911b8fb3c916f7b74521db2f6372",
+          "nonce": 215
+        },
+        {
+          "index": 5,
+          "timestamp": 1763338344762,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338344762
+          },
+          "previousHash": "00d45327848bfe5a68891a5947e8cfb6547e911b8fb3c916f7b74521db2f6372",
+          "hash": "006e88b65c12c2a6995d8f76ef56c59a09cfa6cd12b81fa5e5479aeb95a8c619",
+          "nonce": 782
+        },
+        {
+          "index": 6,
+          "timestamp": 1763338346003,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338346003
+          },
+          "previousHash": "006e88b65c12c2a6995d8f76ef56c59a09cfa6cd12b81fa5e5479aeb95a8c619",
+          "hash": "006badc4f6989a6bd6c841aff531f387d8959fe224f04c66a73eae7be4229a6f",
+          "nonce": 949
+        },
+        {
+          "index": 7,
+          "timestamp": 1763338346405,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338346405
+          },
+          "previousHash": "006badc4f6989a6bd6c841aff531f387d8959fe224f04c66a73eae7be4229a6f",
+          "hash": "00cf7d395fbaa125a1e0611c21cf9442089e2e44f95d952d3a6adb927c5fcd4d",
+          "nonce": 586
+        },
+        {
+          "index": 8,
+          "timestamp": 1763339092906,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7A",
+            "timestamp": 1763339092906
+          },
+          "previousHash": "00cf7d395fbaa125a1e0611c21cf9442089e2e44f95d952d3a6adb927c5fcd4d",
+          "hash": "0008985dfd7d570bc3cddcfeb57a1022a42fc316cec509e0f1faad1258a0a0fb",
+          "nonce": 101
+        },
+        {
+          "index": 9,
+          "timestamp": 1763339099008,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BSE-7B",
+            "timestamp": 1763339099008
+          },
+          "previousHash": "0008985dfd7d570bc3cddcfeb57a1022a42fc316cec509e0f1faad1258a0a0fb",
+          "hash": "00deabcba91b3acb6a00c4ce3494940ecc2a923c30f7dc62925bd4372b9d3e2b",
+          "nonce": 205
+        }
+      ],
+      "difficulty": 2
+    },
+    "deleted": true
+  },
+  "class_1763331918634": {
+    "name": "BCS-1B",
+    "parentDept": "dept_1763331880736",
+    "blockchain": {
+      "name": "BCS-1B",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763331918634,
+          "data": {
+            "type": "GENESIS",
+            "message": "BCS-1A genesis block"
+          },
+          "prev_hash": "0000f98c83ed83d832b6300d1e943ae8dc7469fa176c298ddbade6bd6e52746f",
+          "nonce": 56561,
+          "hash": "000053deac3e2768b3c6dd764957455f32df7f3a532c2f2026d46d1a62570749"
+        },
+        {
+          "index": 1,
+          "timestamp": 1763335526854,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BCS-1S",
+            "timestamp": 1763335526854
+          },
+          "previousHash": "000053deac3e2768b3c6dd764957455f32df7f3a532c2f2026d46d1a62570749",
+          "hash": "0050a7465007347d7b52ec2289d2c9a84c1fdca4078af344c6dd61efec77efca",
+          "nonce": 31
+        },
+        {
+          "index": 2,
+          "timestamp": 1763335535020,
+          "data": {
+            "type": "UPDATE_CLASS",
+            "name": "BCS-1B",
+            "timestamp": 1763335535020
+          },
+          "previousHash": "0050a7465007347d7b52ec2289d2c9a84c1fdca4078af344c6dd61efec77efca",
+          "hash": "0042cd6643ccfe17a5c961ab80ab4c547d19687e18e6303585629f19598613db",
+          "nonce": 548
+        },
+        {
+          "index": 3,
+          "timestamp": 1763338767126,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338767126
+          },
+          "previousHash": "0042cd6643ccfe17a5c961ab80ab4c547d19687e18e6303585629f19598613db",
+          "hash": "00ca2cc802de81988cce6964d334962f0cfe2da776d4c2d79b9bd099edc38559",
+          "nonce": 389
+        },
+        {
+          "index": 4,
+          "timestamp": 1763338768253,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338768253
+          },
+          "previousHash": "00ca2cc802de81988cce6964d334962f0cfe2da776d4c2d79b9bd099edc38559",
+          "hash": "00fedf0bf99c8841eb7b7423983816034d56ec24139f8bb3d2d102e9fa946c51",
+          "nonce": 1
+        },
+        {
+          "index": 5,
+          "timestamp": 1763338768966,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338768966
+          },
+          "previousHash": "00fedf0bf99c8841eb7b7423983816034d56ec24139f8bb3d2d102e9fa946c51",
+          "hash": "0058834e6a010cb8a74e1a8c78dec84d40a81b4eec39f85380651df39e7a26d0",
+          "nonce": 112
+        },
+        {
+          "index": 6,
+          "timestamp": 1763338769129,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338769129
+          },
+          "previousHash": "0058834e6a010cb8a74e1a8c78dec84d40a81b4eec39f85380651df39e7a26d0",
+          "hash": "00c2d52a627b59a29b79cee6bbd072f5e0ef2b2697cab11e6ca47252b3c9e6d0",
+          "nonce": 108
+        },
+        {
+          "index": 7,
+          "timestamp": 1763338769302,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338769302
+          },
+          "previousHash": "00c2d52a627b59a29b79cee6bbd072f5e0ef2b2697cab11e6ca47252b3c9e6d0",
+          "hash": "00a044411bf81f8cb17a9946707264cf015483d388757d235935215ae13115a8",
+          "nonce": 584
+        },
+        {
+          "index": 8,
+          "timestamp": 1763338769557,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763338769557
+          },
+          "previousHash": "00a044411bf81f8cb17a9946707264cf015483d388757d235935215ae13115a8",
+          "hash": "00505e98e40bcc5f2ead81f231dd2b2fb5b8644bbac4fe33bf63e5098b9bda0b",
+          "nonce": 662
+        },
+        {
+          "index": 9,
+          "timestamp": 1763339107336,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339107336
+          },
+          "previousHash": "00505e98e40bcc5f2ead81f231dd2b2fb5b8644bbac4fe33bf63e5098b9bda0b",
+          "hash": "001bb28cfe770abc6c16f5c6901d97e582fff7566e374a00f54fbbed957d5497",
+          "nonce": 232
+        },
+        {
+          "index": 10,
+          "timestamp": 1763339109946,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339109946
+          },
+          "previousHash": "001bb28cfe770abc6c16f5c6901d97e582fff7566e374a00f54fbbed957d5497",
+          "hash": "0015869fe6fa63217c39f9e80186487790f594da22573d4025adbe76f10074ce",
+          "nonce": 392
+        },
+        {
+          "index": 11,
+          "timestamp": 1763339110386,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339110386
+          },
+          "previousHash": "0015869fe6fa63217c39f9e80186487790f594da22573d4025adbe76f10074ce",
+          "hash": "00120263e9c5d68838cc5ef739533bf4076ad584e9edcf9680130f7594730f50",
+          "nonce": 19
+        },
+        {
+          "index": 12,
+          "timestamp": 1763339567138,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339567138
+          },
+          "previousHash": "00120263e9c5d68838cc5ef739533bf4076ad584e9edcf9680130f7594730f50",
+          "hash": "00cb3026266642cdb198cd4f9a119a8561d1f03c96687347958a060c78cc4908",
+          "nonce": 140
+        },
+        {
+          "index": 13,
+          "timestamp": 1763339567384,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339567384
+          },
+          "previousHash": "00cb3026266642cdb198cd4f9a119a8561d1f03c96687347958a060c78cc4908",
+          "hash": "0044a7716b47a42dcfdce10906515c3faf34ddf6b47da99a822548865cb12a62",
+          "nonce": 183
+        },
+        {
+          "index": 14,
+          "timestamp": 1763339568282,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339568282
+          },
+          "previousHash": "0044a7716b47a42dcfdce10906515c3faf34ddf6b47da99a822548865cb12a62",
+          "hash": "00d6ec5790a35c7840ac80b9664dd153fc5ee77d159a28f1d256bfd0825b6953",
+          "nonce": 440
+        },
+        {
+          "index": 15,
+          "timestamp": 1763339568465,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339568465
+          },
+          "previousHash": "00d6ec5790a35c7840ac80b9664dd153fc5ee77d159a28f1d256bfd0825b6953",
+          "hash": "00283c0aaff2b0935c214930268becb6d838c67ca1c6a4363b0b48635c3839ed",
+          "nonce": 276
+        },
+        {
+          "index": 16,
+          "timestamp": 1763339568686,
+          "data": {
+            "type": "DELETE_CLASS",
+            "status": "deleted",
+            "timestamp": 1763339568686
+          },
+          "previousHash": "00283c0aaff2b0935c214930268becb6d838c67ca1c6a4363b0b48635c3839ed",
+          "hash": "00d9c5b9f27ce4e229b719e39ddbb2b5a72e7f7334a6648cf813e29c955e3b38",
+          "nonce": 119
+        }
+      ],
+      "difficulty": 2
+    },
+    "deleted": true
+  },
+  "class_1763343043257": {
+    "name": "BSE-7A",
+    "parentDept": "dept_1763331880736",
+    "blockchain": {
+      "name": "BSE-7A",
+      "chain": [
+        {
+          "index": 0,
+          "timestamp": 1763343043257,
+          "data": "GENESIS BLOCK",
+          "previousHash": "0000f98c83ed83d832b6300d1e943ae8dc7469fa176c298ddbade6bd6e52746f",
+          "hash": "1cb5c47779d21a129e9281caf3934225e37275e7adeb976d5fd9c11acc2088a4",
+          "nonce": 0
+        }
+      ],
+      "difficulty": 2
+    }
+  }
+}

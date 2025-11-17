@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../app.js"></script>
+
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .navbar {
+      background: #1e88e5;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .nav-buttons button {
+      margin: 5px;
+      padding: 10px 18px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 14px;
+    }
+    .nav-buttons button:hover {
+      background: #0d47a1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1e88e5;
+      border-left: 5px solid #1e88e5;
+      padding-left: 10px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .btn {
+      background: #1e88e5;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #0d47a1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th {
+      background: #1e88e5;
+      color: white;
+      padding: 10px;
+      font-size: 15px;
+    }
+    td {
+      padding: 10px;
+      background: #f8f9ff;
+      border-bottom: 1px solid #ccc;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">Blockchain Attendance System</div>
+
+<!-- TOP MENU -->
+<div class="nav-buttons">
+  <a href="home.html"><button>Home</button></a>
+  <a href="departments.html"><button>Departments</button></a>
+  <a href="classes.html"><button>Classes</button></a>
+  <a href="students.html"><button>Students</button></a>
+  <a href="attendance.html"><button>Attendance</button></a>
+  <a href="search.html"><button>Search</button></a>
+  <a href="explorer.html"><button>Explorer</button></a>
+  <a href="validate.html"><button>Validation</button></a>
+  
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <h2>Mark Attendance</h2>
+
+  <input id="studId" placeholder="Enter Student ID">
+  
+  <select id="status">
+    <option value="Present">Present</option>
+    <option value="Absent">Absent</option>
+    <option value="Leave">Leave</option>
+  </select>
+
+  <button class="btn" onclick="mark()">Mark Attendance</button>
+
+  <h2 style="margin-top:25px;">Attendance Ledger</h2>
+
+  <table id="attTable">
+    <tr>
+      <th>Index</th>
+      <th>Status</th>
+      <th>Timestamp</th>
+      <th>Block Hash</th>
+    </tr>
+  </table>
+</div>
+
+<script>
+async function mark() {
+  const studentId = document.getElementById("studId").value;
+  const status = document.getElementById("status").value;
+
+  await apiPost("/attendance/mark", { studentId, status });
+  load(studentId);
+}
+
+async function load(id) {
+  const data = await apiGet("/attendance/student/" + id);
+
+  const table = document.getElementById("attTable");
+  table.innerHTML = `
+    <tr>
+      <th>Index</th>
+      <th>Status</th>
+      <th>Timestamp</th>
+      <th>Block Hash</th>
+    </tr>
+  `;
+
+  data.forEach(b => {
+    table.innerHTML += `
+      <tr>
+        <td>${b.index}</td>
+        <td>${b.data.status || "-"}</td>
+        <td>${new Date(b.timestamp).toLocaleString()}</td>
+        <td>${b.hash.slice(0, 18)}...</td>
+      </tr>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>

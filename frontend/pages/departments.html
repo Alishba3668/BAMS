@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Records</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../app.js"></script>
+
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .navbar {
+      background: #1e88e5;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .nav-buttons button {
+      margin: 5px;
+      padding: 10px 18px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 14px;
+    }
+    .nav-buttons button:hover {
+      background: #0d47a1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1e88e5;
+      border-left: 5px solid #1e88e5;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .btn {
+      background: #1e88e5;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #0d47a1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th {
+      background: #1e88e5;
+      color: white;
+      padding: 12px;
+      font-size: 15px;
+    }
+    td {
+      padding: 12px;
+      background: #f8f9ff;
+      border-bottom: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    #noResults {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #d32f2f;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="navbar">Blockchain Attendance System</div>
+
+<div class="nav-buttons">
+  <a href="home.html"><button>Home</button></a>
+  <a href="departments.html"><button>Departments</button></a>
+  <a href="classes.html"><button>Classes</button></a>
+  <a href="students.html"><button>Students</button></a>
+  <a href="attendance.html"><button>Attendance</button></a>
+  <a href="search.html"><button>Search</button></a>
+  <a href="explorer.html"><button>Explorer</button></a>
+  <a href="validate.html"><button>Validation</button></a>
+</div>
+
+<div class="container">
+  <h2>Search Records</h2>
+
+  <input id="query" placeholder="Search by name, ID, roll, class...">
+
+  <button class="btn" onclick="performSearch()">Search</button>
+
+  <div id="noResults">No matching records found.</div>
+
+  <h2 style="margin-top:25px;">Search Results</h2>
+
+  <table id="resultTable">
+    <tr>
+      <th>Type</th>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </table>
+</div>
+
+<script>
+async function performSearch() {
+  const q = document.getElementById("query").value.trim();
+
+  if (!q) {
+    alert("Please enter a keyword to search.");
+    return;
+  }
+
+  const data = await apiGet("/search?q=" + q);
+
+  const table = document.getElementById("resultTable");
+  const noResults = document.getElementById("noResults");
+
+  table.innerHTML = `
+    <tr><th>Type</th><th>ID</th><th>Name</th></tr>
+  `;
+
+  if (data.length === 0) {
+    noResults.style.display = "block";
+    return;
+  }
+
+  noResults.style.display = "none";
+
+  data.forEach(r => {
+    table.innerHTML += `
+      <tr>
+        <td>${r.type}</td>
+        <td>${r.id}</td>
+        <td>${r.name}</td>
+      </tr>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>

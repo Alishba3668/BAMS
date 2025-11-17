@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blockchain Validation</title>
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    body {
+      background: #eef2f7;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .navbar {
+      background: #1e88e5;
+      color: white;
+      padding: 16px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 0 0 10px 10px;
+    }
+
+    .top-nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .top-nav button {
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .top-nav button:hover {
+      background: #0d47a1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+    }
+
+    h1 {
+      color: #1e88e5;
+      border-left: 5px solid #1e88e5;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background: #1e88e5;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #0d47a1;
+    }
+
+    .card {
+      background:white;
+      padding:18px;
+      border-radius:10px;
+      margin-bottom:20px;
+      border-left: 5px solid #1e88e5;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .heading {
+      font-size:20px;
+      font-weight:bold;
+      margin-bottom:12px;
+      color:#1e88e5;
+    }
+
+    .status-valid {
+      color: #1b5e20;
+      font-weight: bold;
+    }
+
+    .status-invalid {
+      color: #b71c1c;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">Blockchain Attendance System</div>
+
+<div class="top-nav">
+  <a href="home.html"><button>Home</button></a>
+  <a href="departments.html"><button>Departments</button></a>
+  <a href="classes.html"><button>Classes</button></a>
+  <a href="students.html"><button>Students</button></a>
+  <a href="attendance.html"><button>Attendance</button></a>
+  <a href="search.html"><button>Search</button></a>
+  <a href="explorer.html"><button>Explorer</button></a>
+  <a href="validate.html"><button>Validation</button></a>
+</div>
+
+<div class="container">
+  <h1>Blockchain Validation</h1>
+
+  <button class="btn-primary" onclick="runValidation()">Run Validation</button>
+
+  <div id="result" style="margin-top:20px;"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+async function runValidation() {
+  const outputDiv = document.getElementById("result");
+  outputDiv.innerHTML = "<p style='color:#1976d2;'>Validating...</p>";
+
+  try {
+    const res = await fetch(API + "/validate/all");
+    const data = await res.json();
+
+    let html = "";
+
+    // ========================
+    // Departments
+    // ========================
+    html += `<div class="card">
+              <div class="heading">Departments</div>`;
+    for (const id in data.departments) {
+      const ok = data.departments[id];
+      html += `
+        <p><strong>${id}</strong> :
+          <span class="${ok ? "status-valid" : "status-invalid"}">
+            ${ok ? "VALID ✔" : "INVALID ✖"}
+          </span>
+        </p>`;
+    }
+    html += `</div>`;
+
+    // ========================
+    // Classes
+    // ========================
+    html += `<div class="card">
+              <div class="heading">Classes</div>`;
+    for (const id in data.classes) {
+      const ok = data.classes[id];
+      html += `
+        <p><strong>${id}</strong> :
+          <span class="${ok ? "status-valid" : "status-invalid"}">
+            ${ok ? "VALID ✔" : "INVALID ✖"}
+          </span>
+        </p>`;
+    }
+    html += `</div>`;
+
+    // ========================
+    // Students
+    // ========================
+    html += `<div class="card">
+              <div class="heading">Students</div>`;
+    for (const id in data.students) {
+      const ok = data.students[id];
+      html += `
+        <p><strong>${id}</strong> :
+          <span class="${ok ? "status-valid" : "status-invalid"}">
+            ${ok ? "VALID ✔" : "INVALID ✖"}
+          </span>
+        </p>`;
+    }
+    html += `</div>`;
+
+    outputDiv.innerHTML = html;
+
+  } catch (err) {
+    outputDiv.innerHTML = "<p style='color:red;'>Error fetching validation results.</p>";
+  }
+}
+</script>
+
+</body>
+</html>
