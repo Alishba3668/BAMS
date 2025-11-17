@@ -158,21 +158,4 @@ cd frontend
 npx live-server
 ```
 
----
-
-## 📸 Screenshots
-(Add after capturing)
-
-```
-![Home Page](screenshots/home.png)
-![Departments](screenshots/departments.png)
-![Explorer](screenshots/explorer.png)
-![Attendance Ledger](screenshots/ledger.png)
-![Validation](screenshots/validation.png)
-```
-
----
-
-## 📘 License
-MIT License.
 
