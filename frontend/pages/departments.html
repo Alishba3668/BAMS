@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Search Records</title>
+  <title>Departments</title>
   <link rel="stylesheet" href="../styles.css">
   <script src="../app.js"></script>
 
@@ -77,7 +77,6 @@
       font-size: 16px;
       transition: 0.2s;
       width: 100%;
-      margin-top: 10px;
     }
     .btn:hover {
       background: #0d47a1;
@@ -87,27 +86,56 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
+      font-size: 15px;
     }
     th {
       background: #1e88e5;
       color: white;
       padding: 12px;
-      font-size: 15px;
     }
     td {
       padding: 12px;
       background: #f8f9ff;
       border-bottom: 1px solid #ddd;
-      font-size: 15px;
     }
 
-    #noResults {
-      margin-top: 15px;
-      font-size: 16px;
-      color: #d32f2f;
-      font-weight: bold;
-      text-align: center;
+    .danger {
+      background: #d32f2f;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .danger:hover {
+      background: #9a0007;
+    }
+
+    /* Modal */
+    .modal {
       display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 25px;
+      width: 350px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    }
+    .modal-content input {
+      width: 90%;
+    }
+    .close {
+      float: right;
+      font-size: 22px;
+      cursor: pointer;
     }
   </style>
 
@@ -129,60 +157,90 @@
 </div>
 
 <div class="container">
-  <h2>Search Records</h2>
+  <h2>Add Department</h2>
 
-  <input id="query" placeholder="Search by name, ID, roll, class...">
+  <input id="deptName" placeholder="Department Name">
+  <button class="btn" onclick="addDept()">Add Department</button>
 
-  <button class="btn" onclick="performSearch()">Search</button>
+  <h2 style="margin-top:25px;">All Departments</h2>
 
-  <div id="noResults">No matching records found.</div>
-
-  <h2 style="margin-top:25px;">Search Results</h2>
-
-  <table id="resultTable">
+  <table id="deptTable">
     <tr>
-      <th>Type</th>
       <th>ID</th>
       <th>Name</th>
+      <th>Action</th>
     </tr>
   </table>
 </div>
 
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <input id="modalInput">
+    <button class="btn" onclick="submitUpdate()">Update</button>
+  </div>
+</div>
+
 <script>
-async function performSearch() {
-  const q = document.getElementById("query").value.trim();
+let updateId = null;
 
-  if (!q) {
-    alert("Please enter a keyword to search.");
-    return;
-  }
+async function load() {
+  const data = await apiGet("/departments/all");
 
-  const data = await apiGet("/search?q=" + q);
-
-  const table = document.getElementById("resultTable");
-  const noResults = document.getElementById("noResults");
-
+  const table = document.getElementById("deptTable");
   table.innerHTML = `
-    <tr><th>Type</th><th>ID</th><th>Name</th></tr>
+    <tr><th>ID</th><th>Name</th><th>Action</th></tr>
   `;
 
-  if (data.length === 0) {
-    noResults.style.display = "block";
-    return;
-  }
-
-  noResults.style.display = "none";
-
-  data.forEach(r => {
+  for (const id in data) {
     table.innerHTML += `
       <tr>
-        <td>${r.type}</td>
-        <td>${r.id}</td>
-        <td>${r.name}</td>
+        <td>${id}</td>
+        <td>${data[id].name}</td>
+        <td>
+          <button onclick="openModal('${id}','${data[id].name}')">Update</button>
+          <button class="danger" onclick="del('${id}')">Delete</button>
+        </td>
       </tr>
     `;
-  });
+  }
 }
+
+function openModal(id, currentName) {
+  updateId = id;
+  document.getElementById("modalTitle").innerText = "Update Department";
+  document.getElementById("modalInput").value = currentName;
+
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+async function submitUpdate() {
+  const newName = document.getElementById("modalInput").value;
+
+  await apiPut("/departments/update/" + updateId, { name: newName });
+
+  closeModal();
+  load();
+}
+
+async function addDept() {
+  const name = document.getElementById("deptName").value;
+  await apiPost("/departments/add", { name });
+  load();
+}
+
+async function del(id) {
+  await apiDelete("/departments/delete/" + id);
+  load();
+}
+
+load();
 </script>
 
 </body>
