@@ -202,6 +202,30 @@
 </div>
 
 <script>
+
+// GLOBAL VALUES FOR UPDATE
+let updateId = null;
+
+function openModal(type, id, currentValue) {
+  updateId = id;
+  document.getElementById("modalTitle").innerText = "Update Student Name";
+  document.getElementById("modalInput").value = currentValue;
+  document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+async function submitUpdate() {
+  const newValue = document.getElementById("modalInput").value;
+
+  await apiPut("/students/update/" + updateId, { name: newValue });
+
+  closeModal();
+  load();
+}
+
 async function load() {
   const data = await apiGet("/students/all");
   const table = document.getElementById("studTable");
@@ -234,6 +258,7 @@ async function addStudent() {
   const classId = document.getElementById("classId").value;
 
   await apiPost("/students/add", { name, roll, classId });
+
   load();
 }
 
@@ -243,6 +268,7 @@ async function del(id) {
 }
 
 load();
+
 </script>
 
 </body>
