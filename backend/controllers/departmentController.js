@@ -6,7 +6,23 @@ import {
 } from "../services/departmentService.js";
 
 export const getDepartments = (req, res) => {
-  return res.json(getAllDepartments());
+  const all = getAllDepartments();
+
+  const filtered = {};
+
+  for (const id in all) {
+    const chain = all[id].blockchain.chain;
+
+    // last block in chain
+    const lastBlock = chain[chain.length - 1];
+
+    // Hide soft-deleted departments
+    if (lastBlock.data.type !== "DELETE_DEPT") {
+      filtered[id] = all[id];
+    }
+  }
+
+  res.json(filtered);
 };
 
 export const createDepartment = (req, res) => {
