@@ -61,9 +61,8 @@ export function updateDepartment(id, newName) {
 
 export function deleteDepartment(id) {
   const data = load();
-  if (!data[id]) return null;
+  if (!data[id]) return false;
 
-  // Rebuild chain
   const rawChain = data[id].blockchain;
   const bc = new Blockchain(data[id].name);
   bc.chain = rawChain.chain;
@@ -72,12 +71,12 @@ export function deleteDepartment(id) {
   bc.addBlock({
     type: "DELETE_DEPT",
     status: "deleted",
-    timestamp: Date.now()
+    timestamp: Date.now(),
   });
 
-  // Save
   data[id].blockchain = bc;
 
   save(data);
   return true;
 }
+
