@@ -74,31 +74,28 @@ export function updateStudent(id, newName) {
 }
 
 export function deleteStudent(id) {
-  const data = load();
+  const data = loadStudents();
   if (!data[id]) return false;
 
   const studentObj = data[id];
 
-  // -------------------------------
-  // REBUILD STUDENT BLOCKCHAIN
-  // -------------------------------
+  // Rebuild student blockchain
   const rawChain = studentObj.blockchain;
   const chain = new Blockchain(studentObj.name);
   chain.chain = rawChain.chain;
+  chain.difficulty = rawChain.difficulty || 2;
 
-  // Mine a delete block
+  // Add delete block
   chain.addBlock({
-    type: "DELETED",
+    type: "DELETE_STUDENT",
     studentId: id,
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    status: "deleted"
   });
 
-  // Put updated chain back
+  // Save updated chain — DON'T delete student from JSON
   data[id].blockchain = chain;
 
-  // Remove student from storage
-  delete data[id];
-
-  save(data);
+  saveStudents(data);
   return true;
 }
