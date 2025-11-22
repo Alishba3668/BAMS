@@ -1,28 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BAMS Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>BAMS | Dashboard</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../app.js"></script>
+  <style>
+    .dashboard {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 34px;
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-top: 5px;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #2c3e50;
+    }
+
+    .card p {
+      font-size: 40px;
+      font-weight: bold;
+      color: #0e6655;
+      margin: 10px 0;
+    }
+
+    .quick-actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .quick-actions button {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 17px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .nav-btn {
+      background: #2c3e50;
+      color: white;
+    }
+
+    .nav-btn:hover {
+      background: #212f3d;
+    }
+
+    .footer {
+      margin-top: 35px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="navbar">Blockchain Attendance Management System</div>
 
-<div class="container">
-  <h2>Dashboard</h2>
-  <p>Select a module to continue:</p>
+<div class="dashboard">
 
-  <ul>
-    <li><a href="pages/departments.html" class="link-btn">Manage Departments</a></li>
-    <li><a href="pages/classes.html" class="link-btn">Manage Classes</a></li>
-    <li><a href="pages/students.html" class="link-btn">Manage Students</a></li>
-    <li><a href="pages/attendance.html" class="link-btn">Mark Attendance</a></li>
-    <li><a href="pages/explorer.html" class="link-btn">Blockchain Explorer</a></li>
-    <li><a href="pages/validate.html" class="link-btn">Validation Engine</a></li>
-    <li><a href="pages/search.html" class="btn">Search System</a>
+  <div class="title">Welcome to BAMS</div>
+  <div class="subtitle">Secure • Transparent • Tamper-Proof Attendance Records</div>
 
-  </ul>
+  <!-- Stats Grid -->
+  <div class="grid">
+    <div class="card">
+      <h2>Total Departments</h2>
+      <p id="deptCount">0</p>
+    </div>
+
+    <div class="card">
+      <h2>Total Classes</h2>
+      <p id="classCount">0</p>
+    </div>
+
+    <div class="card">
+      <h2>Total Students</h2>
+      <p id="studCount">0</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <h2 style="margin-bottom:10px;">Quick Navigation</h2>
+
+    <a href="departments.html"><button class="nav-btn">Manage Departments</button></a>
+    <a href="classes.html"><button class="nav-btn">Manage Classes</button></a>
+    <a href="students.html"><button class="nav-btn">Manage Students</button></a>
+    <a href="attendance.html"><button class="nav-btn">Mark Attendance</button></a>
+    <a href="search.html"><button class="nav-btn">Search Records</button></a>
+  </div>
+
+  <div class="footer">
+    © 2025 BAMS — Powered by Blockchain Technology
+  </div>
+
 </div>
+
+<script>
+async function loadStats() {
+  try {
+    const depts = await apiGet("/departments/all");
+    const classes = await apiGet("/classes/all");
+    const students = await apiGet("/students/all");
+
+    document.getElementById("deptCount").innerText = Object.keys(depts).length;
+    document.getElementById("classCount").innerText = Object.keys(classes).length;
+    document.getElementById("studCount").innerText = Object.keys(students).length;
+  } catch (err) {
+    console.log("Error loading stats", err);
+  }
+}
+
+loadStats();
+</script>
 
 </body>
 </html>
