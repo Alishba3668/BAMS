@@ -19,7 +19,7 @@ app.use("/api/classes", classRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/validate", validationRoutes);
-app.use("/search", searchRoutes);
+app.use("/api/search", searchRoutes);
 app.use("/api/explorer", explorerRoutes);
 
 app.listen(5000, () => console.log("Server running on port 5000"));
