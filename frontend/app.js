@@ -21,5 +21,15 @@ async function apiPut(url, body) {
 }
 
 async function apiDelete(url) {
-  return fetch(API + url, { method: "DELETE" }).then(res => res.json());
+  return fetch(API + url, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(async res => {
+      if (res.status === 204) return { success: true };
+      try { return await res.json(); }
+      catch { return { success: true }; }
+    });
 }
+
+
