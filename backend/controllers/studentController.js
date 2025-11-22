@@ -6,8 +6,22 @@ import {
 } from "../services/studentService.js";
 
 export const getAllStudents = (req, res) => {
-  res.json(getStudents());
+  const all = getStudents();
+  const filtered = {};
+
+  for (const id in all) {
+    const chain = all[id].blockchain.chain;
+    const lastBlock = chain[chain.length - 1];
+
+    // Hide deleted students
+    if (lastBlock.data.type !== "DELETE_STUDENT") {
+      filtered[id] = all[id];
+    }
+  }
+
+  res.json(filtered);
 };
+
 
 export const createStudent = (req, res) => {
   const { name, roll, classId } = req.body;
