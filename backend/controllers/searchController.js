@@ -43,3 +43,54 @@ export function searchStudents(req, res) {
 
     res.json(results);
 }
+export function globalSearch(req, res) {
+    const keyword = (req.query.q || "").toLowerCase();
+
+    if (!keyword) {
+        return res.json([]);
+    }
+
+    const depts = getAllDepartments();
+    const classes = getClasses();
+    const students = getStudents();
+
+    let results = [];
+
+    // Departments
+    for (const [id, obj] of Object.entries(depts)) {
+        if (obj?.name?.toLowerCase().includes(keyword)) {
+            results.push({
+                type: "Department",
+                id,
+                name: obj.name
+            });
+        }
+    }
+
+    // Classes
+    for (const [id, obj] of Object.entries(classes)) {
+        if (obj?.name?.toLowerCase().includes(keyword)) {
+            results.push({
+                type: "Class",
+                id,
+                name: obj.name
+            });
+        }
+    }
+
+    // Students
+    for (const [id, obj] of Object.entries(students)) {
+        if (
+            obj?.name?.toLowerCase().includes(keyword) ||
+            obj?.roll?.toLowerCase().includes(keyword)
+        ) {
+            results.push({
+                type: "Student",
+                id,
+                name: obj.name
+            });
+        }
+    }
+
+    res.json(results);
+}
