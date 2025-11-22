@@ -180,8 +180,21 @@ function renderExplorer(title, data) {
   let listHTML = "<h3 class='sectionTitle'>List View</h3>";
 
   for (const id in data) {
+
+    const badge = data[id].deleted
+      ? `<span style="color:white; background:#d32f2f; padding:3px 6px;
+         border-radius:5px; margin-left:8px; font-size:12px;">DELETED</span>`
+      : "";
+
+    const nameStyle = data[id].deleted
+      ? "style='text-decoration: line-through; color:#b71c1c;'"
+      : "";
+
     listHTML += `
-      <p><b>${id}</b> — ${data[id].name}
+      <p>
+        <b>${id}</b> —
+        <span ${nameStyle}>${data[id].name}</span>
+        ${badge}
         <button class="btn-primary" onclick="viewChain('${title}','${id}')">View Chain</button>
       </p>
     `;
@@ -189,6 +202,7 @@ function renderExplorer(title, data) {
 
   document.getElementById("listView").innerHTML = listHTML;
 }
+
 
 /* ------------------ View Chain ------------------ */
 
