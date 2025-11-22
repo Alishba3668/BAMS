@@ -7,7 +7,20 @@ import {
 } from "../services/classService.js";
 
 export const getAllClasses = (req, res) => {
-  res.json(getClasses());
+  const all = getClasses();
+  const filtered = {};
+
+  for (const id in all) {
+    const chain = all[id].blockchain.chain;
+    const lastBlock = chain[chain.length - 1];
+
+    // Hide deleted classes
+    if (lastBlock.data.type !== "DELETE_CLASS") {
+      filtered[id] = all[id];
+    }
+  }
+
+  res.json(filtered);
 };
 
 export const getDeptClasses = (req, res) => {
